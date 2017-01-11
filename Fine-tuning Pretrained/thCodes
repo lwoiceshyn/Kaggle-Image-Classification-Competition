@@ -1,0 +1,33 @@
+th main.lua -resetClassifier true -nClasses 8 -retrain pretrained/resnet-200.t7 -nEpochs 15 -data ~/A3ml/ -save ~/Desktop/model/ -batchSize 10 -LR 0.0001 -nThreads 5
+
+th classify.lua ~/Desktop/model/model_best.t7 ~/A3ml/train/sea/03063.jpg 
+
+
+th ~/fb.resnet.torch/contest/classifySave.lua ~/Desktop/model/model_best.t7 ~/Downloads/A3/test/val/*.jpg 
+
+
+th main.lua -resetClassifier true -nClasses 8 -retrain ~/Desktop/model1/model_best.t7 -nEpochs 20 -data ~/A3ml/ -save ~/Desktop/model2/ -batchSize 10 -LR 0.001 -nThreads 6
+
+
+
+
+th main.lua -resetClassifier true -nClasses 8 -retrain ~/Desktop/model/model_9.t7 -nEpochs 15 -data ~/A3ml/ -save ~/Desktop/model3/ -batchSize 10 -LR 0.0005 -nThreads 5
+
+
+LEO RUNNNN THISSSSSSSSSSSSSSSSSSSSSSSSSSSS:
+th main.lua -data ~/A3ml/ -resume ~/Desktop/model3/ -save ~/Desktop/model3/ -nEpochs 40 -batchSize 10 -LR 0.0005 -nThreads 5
+
+
+th main.lua -resetClassifier true -nClasses 8 -retrain pretrained/resnet-200.t7 -nEpochs 40 -data ~/A3ml/ -save ~/Desktop/model4/ -batchSize 16 -LR 0.001 -nThreads 4 -optnet true -shareGradInput true
+
+th main.lua -data ~/A3ml/ -resume ~/Desktop/model4/ -save ~/Desktop/model4b/ -batchSize 16 -LR 0.001 -nThreads 4 -shareGradInput true
+
+
+th main2.lua -data ~/A3mlv3/ -resume ~/Desktop/model/ -batchSize 10 -LR 0.0001 -nThreads 8
+
+th main.lua -data ~/A3mlv3/ -resume ~/Desktop/model8/ -save ~/Desktop/model8/ -nEpochs 40 -batchSize 16 -LR 0.0001 -nThreads 5 -shareGradInput true
+
+th main.lua -data ~/A3mlv3/ -resume ~/Desktop/model9/ -save ~/Desktop/model9/ -nEpochs 40 -batchSize 10 -LR 0.0001 -nThreads 5
+
+
+th ~/fb.resnet.torch/contest/classifySave.lua ~/Desktop/model8/model_26.t7 ~/Downloads/A3/test/val/*.jpg ~/Downloads/A3/test/valPrivate/*.jpg
