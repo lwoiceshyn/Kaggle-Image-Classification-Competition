@@ -2,7 +2,6 @@ import urllib
 import io
 import requests
 
-
 f = open('people.txt')
 i = 0
 for line in f:
